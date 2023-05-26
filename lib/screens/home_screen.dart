@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pettie_admin/screens/product_screen.dart';
 
 
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -26,7 +27,7 @@ Container(
 
     onTap: (){
 
-Get.to(()=>  ProductScreen());
+Get.to(()=>  ProductsScreen());
 
     },
     child: const Card(
