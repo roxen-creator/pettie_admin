@@ -26,7 +26,7 @@ Container(
 
     onTap: (){
 
-Get.to(()=> const ProductScreen());
+Get.to(()=>  ProductScreen());
 
     },
     child: const Card(

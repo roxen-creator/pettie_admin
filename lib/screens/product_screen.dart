@@ -1,10 +1,13 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pettie_admin/controllers/product_controller.dart';
 import 'package:pettie_admin/models/product_model.dart';
+import 'package:pettie_admin/screens/new_product_screen.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
+  final ProductController productController = Get.put(ProductController());
+ ProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,45 @@ class ProductScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+
+ SizedBox(
+  height: 100,
+  child: Card(
+    margin: EdgeInsets.zero,
+    color: Colors.black,
+    child: Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Get.to(() =>  NewProductScreen());
+          },
+          icon: const Icon(Icons.add_circle, color: Colors.white,),
+        ),
+        const Text(' Add a New Product',
+        style: TextStyle(
+          fontSize: 16, 
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+        
+        )
+      ],
+    ),
+  ),
+),
+
+const SizedBox(height: 10,),
+
+
             Expanded(
               child: ListView.builder(
-                  itemCount: Product.products.length,
+                  itemCount:productController.products.length,
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 210,
-                      child: ProductCard(product: Product.products[index]),
+                    return Obx(()=>
+                       SizedBox(
+                        height: 210,
+                        child: ProductCard(product: productController.products[index],index: index,),
+                      ),
                     );
                   }),
             )
@@ -36,7 +71,11 @@ class ProductScreen extends StatelessWidget {
 
 class ProductCard extends StatelessWidget {
   final Product product;
-  const ProductCard({super.key, required this.product});
+   ProductCard({super.key, required this.product, required this.index});
+
+final ProductController productController = Get.find();
+final int index;
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +84,7 @@ class ProductCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -64,6 +104,7 @@ class ProductCard extends StatelessWidget {
               height: 10,
             ),
             Row(
+          
               children: [
                 SizedBox(
                   height: 80,
@@ -73,17 +114,24 @@ class ProductCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(width: 10),
+                // const SizedBox(width: 10),
                 Expanded(
                   child: Column(
+                 
                     children: [
                       Row(
+                      
                         children: [
-                          const Text(
-                            'Price',
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                        
+                          const SizedBox(
+                            width: 50,
+                            child: Text(
+                              'Price',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
                           ),
+                            // const SizedBox(width: 10,),
                           Slider(
                             value: product.price,
                             min: 0,
@@ -91,7 +139,11 @@ class ProductCard extends StatelessWidget {
                             divisions: 50,
                             activeColor: Colors.black,
                             inactiveColor: Colors.black26,
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              productController.updateProductPrice(index, product, value);
+
+                            
+                            },
                           ),
                            Text(
                             'Rs.${product.price.toStringAsFixed(1)}',
@@ -112,6 +164,7 @@ class ProductCard extends StatelessWidget {
                                   fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
+                          // const SizedBox(width:,),
                           Slider(
                             value: product.quantity.toDouble(),
                             min: 0,
@@ -119,10 +172,12 @@ class ProductCard extends StatelessWidget {
                             divisions: 50,
                             activeColor: Colors.black,
                             inactiveColor: Colors.black26,
-                            onChanged: (value) {},
+                            onChanged: (value) {
+                              productController.updateProductQuantity(index, product, value.toInt());
+                            },
                           ),
                            Text(
-                            'Rs.${product.quantity.toInt()}',
+                            '${product.quantity.toInt()}',
                             style: const TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),

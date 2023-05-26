@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 
 class Product extends Equatable {
-  final int id;
   final String name;
   final String category;
   final String description;
@@ -17,7 +17,7 @@ class Product extends Equatable {
 
   Product({
      this.price = 0,
-    required this.id,
+    
     required this.name,
     required this.category,
   this.quantity = 0,
@@ -29,11 +29,11 @@ class Product extends Equatable {
   });
 
   @override
-  List<Object?> get props{ return [id, name, category, description, imageUrl, isRecommended, isPopular, price, quantity, isBestProduct];
+  List<Object?> get props{ return [name, category, description, imageUrl, isRecommended, isPopular, price, quantity, isBestProduct];
 }
 
 Product copyWith({
-  int? id,
+
   String? name,
   String? category,
   String ? description,
@@ -46,7 +46,7 @@ Product copyWith({
 }){
 
   return Product(
-    id: id?? this.id,
+    
     name:name?? this.name,
     category: category?? this.category,
     description: description?? this.description,
@@ -61,7 +61,7 @@ Product copyWith({
 }
 Map<String, dynamic> toMap(){
   return{
-    'id':id,
+   
     'name': name,
     'category': category,
     'description': description,
@@ -75,24 +75,23 @@ Map<String, dynamic> toMap(){
 }
 
 
-factory Product.fromMap(Map<String, dynamic>map){
+factory Product.fromSnapshot(DocumentSnapshot snap){
   return Product(
-    id:map[ 'id'],
-   name: map['name'],
-    category: map['category'], 
-    description: map['description'], 
-    isBestProduct:map ['isBestProduct'], 
-    imageUrl:map ['imageUrl'],
-     isRecommended:map ['isRecommended'],
-      isPopular: map['isPopular'],
-      price: map['price'],
-      quantity: map['quantity'],
+ 
+   name: snap['name'],
+    category: snap['category'], 
+    description: snap['description'], 
+    isBestProduct:snap ['isBestProduct'], 
+    imageUrl:snap ['imageUrl'],
+     isRecommended:snap ['isRecommended'],
+      isPopular: snap['isPopular'],
+      price: snap['price'],
+      quantity: snap['quantity'],
 
       
       );
 }
 String toJson()=> json.encode(toMap());
-factory Product.fromJson(String source)=> Product.fromMap(json.decode(source));
 
 @override
 bool get stringify => true;
@@ -104,7 +103,7 @@ bool get stringify => true;
 
 static List<Product> products =[
   Product(
-    id: 1,
+   
     name: 'Dog tag',
     description: 'the best dog tag in the world',
     category: 'Dog Food',
