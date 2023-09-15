@@ -7,9 +7,9 @@ class Order extends Equatable {
   final int id;
   final int customerId;
   final List<int> productIds;
-  final double deliveryFee;
-  final double subtotal;
-  final double total;
+  final int deliveryFee;
+  final int subtotal;
+  final int total;
   final bool isAccepted;
   final bool isDelivered;
   final bool isCancelled;
@@ -32,9 +32,9 @@ class Order extends Equatable {
     int? id,
     int? customerId,
     List<int>? productIds,
-    double? deliveryFee,
-    double? subtotal,
-    double? total,
+    int? deliveryFee,
+    int? subtotal,
+    int? total,
     bool? isAccepted,
     bool? isDelivered,
     bool? isCancelled,
@@ -80,7 +80,7 @@ class Order extends Equatable {
       isAccepted: snap['isAccepted'],
       isDelivered: snap['isDelivered'],
       isCancelled: snap['isCancelled'],
-      createdAt: snap['createdAt'].toDate(),
+      createdAt:snap['createdAt'].toDate(),
     );
   }
 

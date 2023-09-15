@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pettie_admin/screens/home_screen.dart';
+import 'package:pettie_admin/screens/order_screen.dart';
 import 'package:pettie_admin/screens/product_screen.dart';
 
 import 'screens/new_product_screen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
     getPages: [
         GetPage(name: '/products', page: () => ProductsScreen()),
         GetPage(name: '/products/new', page: () => NewProductScreen()),
-        // GetPage(name: '/orders', page: () => OrdersScreen())
+        GetPage(name: '/orders', page: () =>  OrdersScreen())
       ],
     
     );

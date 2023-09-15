@@ -1,26 +1,28 @@
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
+import 'package:pettie_admin/models/order_model.dart' as order;
 
-// import '../models/order_model.dart';
-// import '../services/database_services.dart';
 
-// class OrderController extends GetxController {
-//   final DatabaseService database = DatabaseService();
 
-//   var orders = <Order>[].obs;
-//   var pendingOrders = <Order>[].obs;
+import '../services/database_services.dart';
 
-//   @override
-//   void onInit() {
-//     orders.bindStream(database.getOrders());
-//     pendingOrders.bindStream(database.getPendingOrders());
-//     super.onInit();
-//   }
+class OrderController extends GetxController {
+  final DatabaseService database = DatabaseService();
 
-//   void updateOrder(
-//     Order order,
-//     String field,
-//     bool value,
-//   ) {
-//     database.updateOrder(order, field, value);
-//   }
-// }
+  var orders = <order.Order>[].obs;
+  var pendingOrders = <order.Order>[].obs;
+
+  @override
+  void onInit() {
+    orders.bindStream(database.getOrders());
+    pendingOrders.bindStream(database.getPendingOrders());
+    super.onInit();
+  }
+
+  void updateOrder(
+    order.Order order,
+    String field,
+    bool value,
+  ) {
+    database.updateOrder(order, field, value);
+  }
+}

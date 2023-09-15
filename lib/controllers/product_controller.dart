@@ -44,7 +44,7 @@ class ProductController extends GetxController {
     Product product,
     int value,
   ) {
-    product.quantity = value;
+    product.quantity = value ;
     products[index] = product;
   }
 

@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
+
 class Product extends Equatable {
-  final String id;
+  final int? id;
   final String name;
   final String category;
   final String description;
@@ -12,21 +13,19 @@ class Product extends Equatable {
   final bool isRecommended;
   final bool isPopular;
   double price;
-    final bool isBestProduct;
-
   int quantity;
-
-
+  final bool isBestProduct;
   Product({
-    required this.id,
+    this.id,
     required this.name,
     required this.category,
     required this.description,
     required this.imageUrl,
     required this.isRecommended,
     required this.isPopular,
+        required this.isBestProduct,
     this.price = 0,
-    this.quantity = 0, required this.isBestProduct,
+    this.quantity = 0,
   });
 
   @override
@@ -46,16 +45,16 @@ class Product extends Equatable {
   }
 
   Product copyWith({
-    String? id,
+    int? id,
     String? name,
     String? category,
     String? description,
     String? imageUrl,
     bool? isRecommended,
     bool? isPopular,
-    double? price,
+    double ? price,
     int? quantity,
-     bool? isBestProduct,
+    isBestProduct
   }) {
     return Product(
       id: id ?? this.id,
@@ -66,7 +65,9 @@ class Product extends Equatable {
       isRecommended: isRecommended ?? this.isRecommended,
       isPopular: isPopular ?? this.isPopular,
       price: price ?? this.price,
-      quantity: quantity ?? this.quantity, isBestProduct: isBestProduct?? this.isBestProduct,
+      quantity: quantity ?? this.quantity,
+      isBestProduct: isBestProduct?? this.isBestProduct,
+      
     );
   }
 
@@ -81,7 +82,6 @@ class Product extends Equatable {
       'isPopular': isPopular,
       'price': price,
       'quantity': quantity,
-      'isBestProduct': isBestProduct,
     };
   }
 
@@ -95,7 +95,7 @@ class Product extends Equatable {
       isRecommended: snap['isRecommended'],
       isPopular: snap['isPopular'],
       price: snap['price'],
-      quantity: snap['quantity'], isBestProduct:snap['isBestProduct'] ,
+      quantity: snap['quantity'], isBestProduct: snap['isBestProduct'],
     );
   }
 
@@ -105,19 +105,31 @@ class Product extends Equatable {
   bool get stringify => true;
 
   static List<Product> products = [
-   Product(
-      id: '4',
-      name: 'Smoothies #1',
+    Product(
+      id: 1,
+      name: 'Soft Drink #1',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      category: 'Smoothies',
+      category: 'Soft Drinks',
       imageUrl:
-          'https://images.unsplash.com/photo-1526424382096-74a93e105682?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80', //https://unsplash.com/photos/kcYXj4tBtes
-      price: 2.99,
+          'https://images.unsplash.com/photo-1598614187854-26a60e982dc4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', //https://unsplash.com/photos/dO9A6mhSZZY
+      price: 42.2,
       quantity: 10,
       isRecommended: true,
-      isPopular: false,
-      isBestProduct: false,
+      isPopular: false, isBestProduct: false,
+    ),
+    Product(
+      id: 2,
+      name: 'Soft Drink #2',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      category: 'Soft Drinks',
+      imageUrl:
+          'https://images.unsplash.com/photo-1610873167013-2dd675d30ef4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=488&q=80', //https://unsplash.com/photos/Viy_8zHEznk
+      price: 2.2,
+      quantity: 10,
+      isRecommended: false,
+      isPopular: true, isBestProduct: true,
     ),
   ];
 }

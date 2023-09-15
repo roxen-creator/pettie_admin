@@ -1,20 +1,35 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
+// import 'package:charts_flutter';
 
-// class OrderStats {
-//   final DateTime dateTime;
-//   final int index;
-//   final int orders;
-//   charts.Color? barColor;
+// // class OrderStats {
+// //   final DateTime dateTime;
+// //   final int index;
+// //   final int orders;
+// //   charts.Color? barColor;
 
-//   OrderStats({
-//     required this.dateTime,
-//     required this.index,
-//     required this.orders,
-//     this.barColor,
-//   }) {
-//     barColor = charts.ColorUtil.fromDartColor(Colors.black);
+// //   OrderStats({
+// //     required this.dateTime,
+// //     required this.index,
+// //     required this.orders,
+// //     this.barColor,
+// //   }) {
+// //     barColor = charts.ColorUtil.fromDartColor(Colors.black);
+// //   }
+
+// class OrderChart extends StatelessWidget {
+//   final List<<charts.Series> seriesList;
+//   final bool animate;
+//  OrderChart({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
 //   }
+
+
+
+
 
 //   factory OrderStats.fromSnapshot(DocumentSnapshot snap, int index) {
 //     return OrderStats(
@@ -101,4 +116,4 @@
 //       orders: 29,
 //     ),
 //   ];
-// }
+// },
