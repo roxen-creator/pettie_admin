@@ -244,7 +244,7 @@ import '../models/product_model.dart';
 // }
 
 class OrdersScreen extends StatelessWidget {
-  OrdersScreen({super.key});
+  OrdersScreen({Key? key}) : super(key: key);
   final OrderController orderController = Get.put(OrderController());
   @override
   Widget build(BuildContext context) {
@@ -260,7 +260,8 @@ class OrdersScreen extends StatelessWidget {
               () => ListView.builder(
                   itemCount: orderController.pendingOrders.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return OrderCard(order: orderController.pendingOrders[index]);
+                    return OrderCard(
+                        order: orderController.pendingOrders[index]);
                   }),
             ),
           )
@@ -280,6 +281,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var products = Product.products
+        // ignore: iterable_contains_unrelated_type
         .where((product) => order.productIds.contains(product.id))
         .toList();
 
@@ -438,11 +440,9 @@ class OrderCard extends StatelessWidget {
                           backgroundColor: Colors.black,
                           minimumSize: const Size(150, 40)),
                       onPressed: () {
-                         orderController.updateOrder(
-                                order, 'isCancelled', !order.isCancelled);
-                          },
-
-                    
+                        orderController.updateOrder(
+                            order, 'isCancelled', !order.isCancelled);
+                      },
                       child: const Text(
                         'Cancel',
                         style: TextStyle(

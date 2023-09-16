@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-
+// ignore: must_be_immutable
 class Product extends Equatable {
-  final int? id;
+  final String? id;
   final String name;
   final String category;
   final String description;
@@ -23,7 +23,7 @@ class Product extends Equatable {
     required this.imageUrl,
     required this.isRecommended,
     required this.isPopular,
-        required this.isBestProduct,
+    required this.isBestProduct,
     this.price = 0,
     this.quantity = 0,
   });
@@ -44,18 +44,18 @@ class Product extends Equatable {
     ];
   }
 
-  Product copyWith({
-    int? id,
-    String? name,
-    String? category,
-    String? description,
-    String? imageUrl,
-    bool? isRecommended,
-    bool? isPopular,
-    double ? price,
-    int? quantity,
-    isBestProduct
-  }) {
+  Product copyWith(
+      {String? id,
+      String? name,
+      String? category,
+      String? description,
+      String? imageUrl,
+      bool? isRecommended,
+       bool? isBestProduct,
+      bool? isPopular,
+      double? price,
+      int? quantity,
+    }) {
     return Product(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -66,8 +66,7 @@ class Product extends Equatable {
       isPopular: isPopular ?? this.isPopular,
       price: price ?? this.price,
       quantity: quantity ?? this.quantity,
-      isBestProduct: isBestProduct?? this.isBestProduct,
-      
+      isBestProduct: isBestProduct ?? this.isBestProduct,
     );
   }
 
@@ -87,7 +86,7 @@ class Product extends Equatable {
 
   factory Product.fromSnapshot(DocumentSnapshot snap) {
     return Product(
-      id: snap['id'],
+      id: snap.id,
       name: snap['name'],
       description: snap['description'],
       category: snap['category'],
@@ -95,7 +94,8 @@ class Product extends Equatable {
       isRecommended: snap['isRecommended'],
       isPopular: snap['isPopular'],
       price: snap['price'],
-      quantity: snap['quantity'], isBestProduct: snap['isBestProduct'],
+      quantity: snap['quantity'],
+      isBestProduct: snap['isBestProduct'],
     );
   }
 
@@ -106,7 +106,7 @@ class Product extends Equatable {
 
   static List<Product> products = [
     Product(
-      id: 1,
+      id: '1',
       name: 'Soft Drink #1',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -119,7 +119,7 @@ class Product extends Equatable {
       isPopular: false, isBestProduct: false,
     ),
     Product(
-      id: 2,
+      id: '2',
       name: 'Soft Drink #2',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',

@@ -5,7 +5,8 @@ import 'package:pettie_admin/screens/product_screen.dart';
 import 'order_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+    const HomeScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
